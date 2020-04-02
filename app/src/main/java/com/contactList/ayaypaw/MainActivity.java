@@ -45,14 +45,14 @@ public class MainActivity extends AppCompatActivity {
 
         emergencyContactInterface =retrofit.create(API_Interface.class);
 
-        Call<List<EmergencyDataModel>> call = emergencyContactInterface.getAllContact();
-        call.enqueue(new Callback<List<EmergencyDataModel>>() {
+        Call<EmergencyDataModel> call = emergencyContactInterface.getAllContact();
+        call.enqueue(new Callback<EmergencyDataModel>() {
             @Override
-            public void onResponse(Call<List<EmergencyDataModel>> call, Response<List<EmergencyDataModel>> response) {
+            public void onResponse(Call<EmergencyDataModel> call, Response<EmergencyDataModel> response) {
                 if (response.isSuccessful()) {
-                    List<EmergencyDataModel> contactList = response.body();
-                    Log.i("Success", "API Success " + response.body().toString());
-                    Toast.makeText(getApplicationContext(), "API Succcess" + contactList.size(), Toast.LENGTH_SHORT).show();
+                    EmergencyDataModel contactList = response.body();
+                    Log.i("Success", "API Success " + contactList.getMajorDimension());
+                    Toast.makeText(getApplicationContext(), "API Succcess" + contactList.getValues().size(), Toast.LENGTH_SHORT).show();
 
                 } else {
                     int statusCode = response.code();
@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<EmergencyDataModel>> call, Throwable t) {
+            public void onFailure(Call<EmergencyDataModel> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
                 Log.d("Fail",t.getMessage());
 
