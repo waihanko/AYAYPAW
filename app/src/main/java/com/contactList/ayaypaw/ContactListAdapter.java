@@ -1,12 +1,18 @@
 package com.contactList.ayaypaw;
 
 
-
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.contactList.ayaypaw.data_model.ContactModel;
@@ -19,15 +25,19 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
     private List<ContactModel> contactModelList;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView stateName, personName, personRole,phoneNumber,townshipName;
+        private TextView stateName, personName, personRole, phoneNumber, departmentName,tv_responsibility;
+        private LinearLayout lv_phoneNumber1, lv_phoneNumber2;
 
-        public MyViewHolder(View view) {
+        private MyViewHolder(View view) {
             super(view);
             stateName = (TextView) view.findViewById(R.id.stateName);
             personName = (TextView) view.findViewById(R.id.personName);
             personRole = (TextView) view.findViewById(R.id.personRole);
             phoneNumber = (TextView) view.findViewById(R.id.phoneNumber);
-            townshipName = (TextView) view.findViewById(R.id.townshipName);
+            tv_responsibility = (TextView) view.findViewById(R.id.responsibility);
+            departmentName = (TextView) view.findViewById(R.id.departmentName);
+            lv_phoneNumber1 = (LinearLayout) view.findViewById(R.id.lv_phNo1);
+            lv_phoneNumber2 = (LinearLayout) view.findViewById(R.id.lv_phNo2);
 
         }
     }
@@ -40,19 +50,70 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.contact_list_row, parent, false);
+                .inflate(R.layout.contact_list_row_sample, parent, false);
 
         return new MyViewHolder(itemView);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        ContactModel contactModel = contactModelList.get(position);
-        holder.stateName.setText(contactModel.getStateName());
+        ContactModel contactModel = contactModelList.get(position + 1);
+        String contactNo = "";
+        Long phone1 = 0L, phone2 = 0L;
+
+
+
+        if (!contactModel.getPhoneNumberOne().equals("null")) {
+            try {
+                phone1 = Long.parseLong(contactModel.getPhoneNumberOne().replaceAll("\\s+", "").trim());
+            } catch (Exception e) {
+                phone1 = Long.parseLong("0");
+            }
+            contactNo = contactModel.getPhoneNumberOne();
+        }
+
+        if (!contactModel.getPhoneNumberTwo().equals("null")) {
+            try {
+                phone2 = Long.parseLong(contactModel.getPhoneNumberTwo().replaceAll("\\s+", "").trim());
+            } catch (Exception e) {
+                phone2 = Long.parseLong("0");
+            }
+            contactNo += ", " + contactModel.getPhoneNumberTwo();
+
+        }
+
+        final Long finalPhone1 = phone1;
+        holder.lv_phoneNumber1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                callPhone(view, finalPhone1);
+            }
+        });
+
+        final Long finalPhone2 = phone2;
+        holder.lv_phoneNumber2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                callPhone(view, finalPhone2);
+            }
+        });
+
         holder.personName.setText(contactModel.getPersonName());
         holder.personRole.setText(contactModel.getPersonRole());
-        holder.phoneNumber.setText(contactModel.getPhoneNumberOne());
-        holder.townshipName.setText(contactModel.getTownshipName());
+        holder.stateName.setText(contactModel.getStateName() + " -- " + contactModel.getTownshipName());
+        holder.phoneNumber.setText(contactNo);
+        holder.departmentName.setText(contactModel.getDepartment());
+        holder.tv_responsibility.setText("("+ contactModel.getResponsibility() +")");
+    }
+
+    private void callPhone(View v, Long phNo) {
+        Intent callIntent = new Intent(Intent.ACTION_CALL);
+        callIntent.setData(Uri.parse("tel:" + "0" + phNo));//change the number
+        if (ActivityCompat.checkSelfPermission(v.getContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        v.getContext().startActivity(callIntent);
     }
 
     @Override

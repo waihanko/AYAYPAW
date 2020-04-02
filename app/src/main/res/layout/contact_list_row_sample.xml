@@ -1,0 +1,169 @@
+<androidx.cardview.widget.CardView xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="@dimen/spacing_middle"
+    android:layout_marginLeft="@dimen/spacing_large"
+    android:layout_marginRight="@dimen/spacing_large"
+    android:layout_marginTop="@dimen/spacing_large"
+    android:visibility="visible"
+    app:cardCornerRadius="3dp"
+    app:cardElevation="2dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/personName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:text="Adams Green"
+            android:layout_marginLeft="@dimen/spacing_large"
+            android:layout_marginRight="@dimen/spacing_large"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+            android:textColor="@color/grey_90" />
+
+        <TextView
+            android:id="@+id/responsibility"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\u0040adams.green"
+            android:layout_marginRight="@dimen/spacing_large"
+            android:layout_marginLeft="@dimen/spacing_large"
+            android:layout_marginTop="@dimen/spacing_xsmall"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="@color/grey_60" />
+
+
+        <TextView
+            android:id="@+id/stateName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\u0040adams.green"
+            android:layout_marginRight="@dimen/spacing_large"
+            android:layout_marginLeft="@dimen/spacing_large"
+            android:layout_marginTop="@dimen/spacing_middle"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="@color/grey_60" />
+
+
+        <TextView
+            android:id="@+id/phoneNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\u0040adams.green"
+            android:layout_marginLeft="@dimen/spacing_large"
+            android:layout_marginRight="@dimen/spacing_large"
+            android:layout_marginTop="@dimen/spacing_xsmall"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="@color/grey_60" />
+
+        <TextView
+            android:id="@+id/personRole"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\u0040adams.green"
+            android:layout_marginLeft="@dimen/spacing_large"
+            android:layout_marginRight="@dimen/spacing_large"
+            android:layout_marginTop="@dimen/spacing_middle"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="@color/grey_60" />
+
+
+        <TextView
+            android:id="@+id/departmentName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\u0040adams.green"
+            android:layout_marginRight="@dimen/spacing_large"
+            android:layout_marginLeft="@dimen/spacing_large"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:layout_marginTop="@dimen/spacing_xsmall"
+            android:textColor="@color/grey_60" />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/spacing_middle"
+            android:background="@color/grey_5" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="?attr/selectableItemBackground"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:padding="@dimen/spacing_medium">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:id="@+id/lv_phNo1"
+                        android:padding="@dimen/spacing_medium">
+
+                        <ImageButton
+                            android:layout_width="?attr/actionBarSize"
+                            android:layout_height="?attr/actionBarSize"
+                            android:background="@android:color/transparent"
+                            android:tint="@color/grey_40"
+                            app:srcCompat="@drawable/ic_call_24dp"
+                            tools:ignore="VectorDrawableCompat" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/phone_No1"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                            android:textColor="@color/colorPrimary" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/grey_5" />
+
+                    <LinearLayout
+                        android:id="@+id/lv_phNo2"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:padding="@dimen/spacing_medium">
+
+                        <ImageButton
+                            android:layout_width="?attr/actionBarSize"
+                            android:layout_height="?attr/actionBarSize"
+                            android:background="@android:color/transparent"
+                            android:tint="@color/grey_40"
+                            app:srcCompat="@drawable/ic_call_24dp"
+                            tools:ignore="VectorDrawableCompat" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/phone_No2"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                            android:textColor="@color/colorPrimary" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

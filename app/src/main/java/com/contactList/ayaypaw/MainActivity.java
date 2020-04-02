@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                                 value.get(i).get(0), value.get(i).get(2), value.get(i).get(4), value.get(i).get(6), value.get(i).get(9));
                         contactList.add(contactModel);
 
-                        // Log.i("Data", contactData[i][0]);
+                         Log.i("Data", contactData[i][8]);
 
                     }
                     contactListAdapter = new ContactListAdapter(contactList);
@@ -79,9 +79,6 @@ public class MainActivity extends AppCompatActivity {
                     recyclerView.setLayoutManager(mLayoutManager);
                     recyclerView.setItemAnimator(new DefaultItemAnimator());
                     recyclerView.setAdapter(contactListAdapter);
-
-
-                    Toast.makeText(getApplicationContext(), "API Succcess" + contactListData.getValues().size(), Toast.LENGTH_SHORT).show();
 
                 } else {
                     int statusCode = response.code();
