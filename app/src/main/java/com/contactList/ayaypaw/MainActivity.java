@@ -32,31 +32,60 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ContactListAdapter contactListAdapter;
     API_Interface emergencyContactInterface;
+    List<List<String>> value;
     private String TAG = "Response";
+    private String contactData[][];
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        recyclerView = (RecyclerView) findViewById(R.id.contact_list);
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(ApiUtils.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create()) //Here we are using the GsonConverterFactory to directly convert json data to object
                 .build();
 
-        emergencyContactInterface =retrofit.create(API_Interface.class);
+        emergencyContactInterface = retrofit.create(API_Interface.class);
 
         Call<EmergencyDataModel> call = emergencyContactInterface.getAllContact();
         call.enqueue(new Callback<EmergencyDataModel>() {
             @Override
             public void onResponse(Call<EmergencyDataModel> call, Response<EmergencyDataModel> response) {
                 if (response.isSuccessful()) {
-                    EmergencyDataModel contactList = response.body();
-                    Log.i("Success", "API Success " + contactList.getMajorDimension());
-                    Toast.makeText(getApplicationContext(), "API Succcess" + contactList.getValues().size(), Toast.LENGTH_SHORT).show();
+                    EmergencyDataModel contactListData = response.body();
+                    Log.i("Success", "API Success ");
+                    value = contactListData.getValues();
+
+                    contactData = new String[value.size()][10];
+                    for (int i = 0; i < value.size(); i++) {
+
+                        for (int j = 0; j<10;j++){
+                            contactData[i][j] = value.get(i).get(j);
+                        }
+
+
+
+                        ContactModel contactModel = new ContactModel(value.get(i).get(1), value.get(i).get(5),
+                                value.get(i).get(7), value.get(i).get(3), value.get(i).get(8),
+                                value.get(i).get(0), value.get(i).get(2), value.get(i).get(4), value.get(i).get(6), value.get(i).get(9));
+                        contactList.add(contactModel);
+
+                        // Log.i("Data", contactData[i][0]);
+
+                    }
+                    contactListAdapter = new ContactListAdapter(contactList);
+                    RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+                    recyclerView.setLayoutManager(mLayoutManager);
+                    recyclerView.setItemAnimator(new DefaultItemAnimator());
+                    recyclerView.setAdapter(contactListAdapter);
+
+
+                    Toast.makeText(getApplicationContext(), "API Succcess" + contactListData.getValues().size(), Toast.LENGTH_SHORT).show();
 
                 } else {
                     int statusCode = response.code();
-                    Log.d(TAG,statusCode+"");
+                    Log.d(TAG, statusCode + "");
                     Toast.makeText(getApplicationContext(), statusCode + "", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -64,41 +93,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<EmergencyDataModel> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
-                Log.d("Fail",t.getMessage());
+                Log.d("Fail", t.getMessage());
 
             }
         });
 
 
-        recyclerView = (RecyclerView) findViewById(R.id.contact_list);
-
-        contactListAdapter = new ContactListAdapter(contactList);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(contactListAdapter);
-
-        prepareMovieData();
     }
 
-    private void prepareMovieData() {
-        ContactModel contactModel = new ContactModel("Yangon", "General Manager", "Dagon","0978256478","PhyoeKo");
-        contactList.add(contactModel);
 
-
-         contactModel = new ContactModel("Yangon", "General Manager", "Dagon","0978256478","PhyoeKo");
-        contactList.add(contactModel);
-
-
-        contactModel = new ContactModel("Yangon", "General Manager", "Dagon","0978256478","PhyoeKo");
-        contactList.add(contactModel);
-
-         contactModel = new ContactModel("Yangon", "General Manager", "Dagon","0978256478","PhyoeKo");
-        contactList.add(contactModel);
-
-
-
-
-        contactListAdapter.notifyDataSetChanged();
-    }
 }

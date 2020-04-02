@@ -8,6 +8,6 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 
 public interface API_Interface {
-    @GET("Unicode!A1:J535?key=AIzaSyAQFhzGIMKrVfh38YX94I97cYTaaACKdqU")
+    @GET("Sheet1!A1:J535?key=AIzaSyAQFhzGIMKrVfh38YX94I97cYTaaACKdqU")
     Call<EmergencyDataModel> getAllContact();
 }

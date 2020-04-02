@@ -1,5 +1,6 @@
 package com.contactList.ayaypaw.model;
 
+import com.contactList.ayaypaw.data_model.ContactModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -44,4 +45,6 @@ public class EmergencyDataModel {
     public void setMajorDimension( String majorDimension ) {
         this.majorDimension = majorDimension;
     }
+
+
 }

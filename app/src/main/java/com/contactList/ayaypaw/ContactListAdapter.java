@@ -51,7 +51,7 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
         holder.stateName.setText(contactModel.getStateName());
         holder.personName.setText(contactModel.getPersonName());
         holder.personRole.setText(contactModel.getPersonRole());
-        holder.phoneNumber.setText(contactModel.getPhoneNumber());
+        holder.phoneNumber.setText(contactModel.getPhoneNumberOne());
         holder.townshipName.setText(contactModel.getTownshipName());
     }
 
