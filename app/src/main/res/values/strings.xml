@@ -2,4 +2,7 @@
     <string name="app_name">A YAY PAW - အရေးပေါ်</string>
     <string name="phone_No1">Phone-1</string>
     <string name="phone_No2">Phone-2</string>
+    <string name="str_Content">Hello Bro</string>
+    <string name="about">About</string>
+    <string name="release_date">April 2020</string>
 </resources>
