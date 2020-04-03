@@ -1,10 +1,10 @@
 package com.contactList.ayaypaw.data_model;
 
-public class RegionModel {
+public class TownshipModel {
     //"MMR001D003", "Bhamo", "MMR001010", "ဗန်းမော်", "Bhamo"
     String StateMMR, StateNameEng, TownshipMMR, TownshipNameMM, TownshipNameEng;
 
-    public RegionModel(String stateMMR, String stateNameEng, String townshipMMR, String townshipNameMM, String townshipNameEng) {
+    public TownshipModel(String stateMMR, String stateNameEng, String townshipMMR, String townshipNameMM, String townshipNameEng) {
         StateMMR = stateMMR;
         StateNameEng = stateNameEng;
         TownshipMMR = townshipMMR;
