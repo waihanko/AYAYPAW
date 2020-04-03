@@ -25,8 +25,8 @@ import java.util.List;
 
 public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.MyViewHolder> {
 
-    private List<ContactModel> contactModelList;
-    private List<ContactModel> contactListFiltered;
+    public static List<ContactModel> contactModelList;
+    public static List<ContactModel> contactListFiltered = new ArrayList<>();
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         private TextView stateName, personName, personRole, phoneNumber, departmentName,tv_responsibility;
@@ -62,11 +62,10 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        ContactModel contactModel = contactModelList.get(position + 1);
+        ContactModel contactModel = contactModelList.get(position);
+//        ContactModel contactModel = contactModelList.get(position + 1);
         String contactNo = "";
         Long phone1 = 0L, phone2 = 0L;
-
-
 
         if (!contactModel.getPhoneNumberOne().equals("null")) {
             try {
@@ -139,7 +138,10 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
 
                         // name match condition. this might differ depending on your requirement
                         // here we are looking for name or phone number match
-                        if (row.getStateCode().toLowerCase().contains(charString.toLowerCase())) {
+                        if (row.getStateCode().toLowerCase().contains(charString.toLowerCase())||
+                                row.getStateName().toLowerCase().contains(charString.toLowerCase()) ||
+                                row.getTownshipName().toLowerCase().contains(charString.toLowerCase()) ||
+                                row.getPersonName().toLowerCase().contains(charString.toLowerCase())) {
                             filteredList.add(row);
                         }
                     }
@@ -155,9 +157,11 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
                 contactListFiltered = (ArrayList<ContactModel>) filterResults.values;
-                Log.i("SEARCH",contactListFiltered.size()+"");
+                contactModelList = contactListFiltered;
+                Log.i("SEARCH",contactModelList.size()+"");
                 notifyDataSetChanged();
             }
+
         };
     }
 
